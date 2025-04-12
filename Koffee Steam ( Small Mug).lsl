@@ -1,5 +1,3 @@
-
---[[ This steam looks really great with an lsl script, but not in SLua anymore. ]]
 -- Choose a pattern from the following:
 -- PSYS_SRC_PATTERN_EXPLODE
 -- PSYS_SRC_PATTERN_DROP
