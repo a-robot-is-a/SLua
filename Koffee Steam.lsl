@@ -44,6 +44,16 @@ omega = vector(0.0,0.0,0.3)     -- Rotation of ANGLE patterns around the source
 life = 0.0                      -- Life in seconds for the system to make particles
 
 -- Script variables
+    flags = bit32.bor( 
+                  glow and PSYS_PART_EMISSIVE_MASK or 0,
+                  bounce and PSYS_PART_BOUNCE_MASK or 0,
+                  interpColor and PSYS_PART_INTERP_COLOR_MASK or 0,
+                  interpSize and PSYS_PART_INTERP_SCALE_MASK or 0,
+                  wind and PSYS_PART_WIND_MASK or 0,
+                  followSource and PSYS_PART_FOLLOW_SRC_MASK or 0,
+                  followVel and PSYS_PART_FOLLOW_VELOCITY_MASK or 0,
+                  target ~= "" and PSYS_PART_TARGET_POS_MASK or 0)
+
 flags = 0
 
 myTable = {
@@ -70,22 +80,7 @@ myTable = {
     PSYS_PART_END_ALPHA, endAlpha
 }
 
-
-function updateParticles()
-    flags = 0
-    flags = bit32.bor(flags, 
-                  glow and PSYS_PART_EMISSIVE_MASK or 0,
-                  bounce and PSYS_PART_BOUNCE_MASK or 0,
-                  interpColor and PSYS_PART_INTERP_COLOR_MASK or 0,
-                  interpSize and PSYS_PART_INTERP_SCALE_MASK or 0,
-                  wind and PSYS_PART_WIND_MASK or 0,
-                  followSource and PSYS_PART_FOLLOW_SRC_MASK or 0,
-                  followVel and PSYS_PART_FOLLOW_VELOCITY_MASK or 0,
-                  target ~= "" and PSYS_PART_TARGET_POS_MASK or 0)
-end
-
 function state_entry()
-        updateParticles()
         ll.ParticleSystem(myTable)
 end
 
